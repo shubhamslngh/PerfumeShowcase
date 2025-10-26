@@ -2,12 +2,19 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { ShoppingBag } from "lucide-react";
+import useCartStore from "@/store/cartStore";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false); // ✅ hydration-safe mount flag
+
+  // Zustand cart
+  const totalItems = useCartStore((state) => state.getTotalItems());
 
   useEffect(() => {
+    setMounted(true);
     const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -17,23 +24,11 @@ export default function Header() {
     { label: "Home", href: "/" },
     { label: "Collection", href: "/products" },
     { label: "Craftsmanship", href: "/craftsmanship" },
-    // { label: "Stories", href: "/stories" },
-    // { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ];
 
-  const linkVariants = {
-    hidden: { opacity: 0, x: 20 },
-    visible: (i) => ({
-      opacity: 1,
-      x: 0,
-      transition: { delay: 0.1 * i, duration: 0.4, ease: "easeOut" },
-    }),
-  };
-
   return (
     <>
-      {/* Header */}
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -46,9 +41,9 @@ export default function Header() {
         <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6 md:px-10">
           {/* Left Nav */}
           <nav className="hidden md:flex gap-10">
-            {navLinks.slice(0, 2).map((link, i) => (
+            {navLinks.slice(0, 2).map((link) => (
               <Link
-                key={i}
+                key={link.label}
                 href={link.href}
                 className="text-sm tracking-wider uppercase text-gray-300 hover:text-[#ffcb9a] relative group">
                 {link.label}
@@ -57,25 +52,44 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Center Brand */}
+          {/* Brand */}
           <motion.div
             whileHover={{ scale: 1.03 }}
             className="font-[var(--font-heading)] text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#ffcb9a] to-white tracking-widest uppercase select-none">
             <Link href="/">Post Modern</Link>
           </motion.div>
 
-          {/* Right Nav (Desktop) */}
-          <nav className="hidden md:flex gap-10">
-            {navLinks.slice(2).map((link, i) => (
+          {/* Right Nav */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.slice(2).map((link) => (
               <Link
-                key={i}
+                key={link.label}
                 href={link.href}
                 className="text-sm tracking-wider uppercase text-gray-300 hover:text-[#ffcb9a] relative group">
                 {link.label}
                 <span className="absolute left-0 -bottom-1 h-px w-0 bg-[#ffcb9a] group-hover:w-full transition-all duration-500"></span>
               </Link>
             ))}
-          </nav>
+
+            {/* 🛍️ Cart Icon */}
+            <Link
+              href="/cart"
+              className="relative text-[#ffcb9a] hover:text-white transition-all"
+              aria-label="Cart">
+              <ShoppingBag className="w-6 h-6" />
+              {mounted &&
+                totalItems > 0 && ( // ✅ Only render after mount
+                  <motion.span
+                    key={totalItems}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 12 }}
+                    className="absolute -top-2 -right-2 text-[10px] font-semibold bg-[#ffcb9a] text-black rounded-full w-4 h-4 flex items-center justify-center">
+                    {totalItems}
+                  </motion.span>
+                )}
+            </Link>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -87,11 +101,10 @@ export default function Header() {
         </div>
       </motion.header>
 
-      {/* Drawer Overlay */}
+      {/* Drawer Menu */}
       <AnimatePresence>
         {menuOpen && (
           <>
-            {/* Dim Background */}
             <motion.div
               className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
               initial={{ opacity: 0 }}
@@ -99,60 +112,44 @@ export default function Header() {
               exit={{ opacity: 0 }}
               onClick={() => setMenuOpen(false)}
             />
-
-            {/* Drawer Panel */}
             <motion.div
               className="fixed top-0 right-0 h-full w-[80%] sm:w-[60%] bg-gradient-to-b from-[#1a0000] via-[#250000] to-black border-l border-[#ffcb9a]/20 z-50 shadow-[0_0_60px_rgba(255,203,154,0.15)] flex flex-col"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 90, damping: 18 }}>
-              {/* Close Button */}
               <div className="flex justify-end p-5">
                 <button
                   onClick={() => setMenuOpen(false)}
-                  className="text-[#ffcb9a] text-3xl hover:text-white transition"
-                  aria-label="Close Menu">
+                  className="text-[#ffcb9a] text-3xl hover:text-white transition">
                   ✕
                 </button>
               </div>
 
-              {/* Animated Links */}
               <div className="flex flex-col mt-10 px-10 space-y-8">
-                {navLinks.map((link, i) => (
-                  <motion.div
+                {navLinks.map((link) => (
+                  <Link
                     key={link.label}
-                    custom={i}
-                    variants={linkVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit={{ opacity: 0, x: 40 }}>
-                    <Link
-                      href={link.href}
-                      onClick={() => setMenuOpen(false)}
-                      className="block text-2xl font-[var(--font-heading)] uppercase tracking-widest text-[#ffcb9a] hover:text-white transition-colors relative group">
-                      {link.label}
-                      <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-[#ffcb9a] group-hover:w-full transition-all duration-500"></span>
-                    </Link>
-                    {/* Divider line */}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="block text-2xl font-[var(--font-heading)] uppercase tracking-widest text-[#ffcb9a] hover:text-white transition-colors relative group">
+                    {link.label}
+                    <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-[#ffcb9a] group-hover:w-full transition-all duration-500"></span>
                     <div className="w-full h-px bg-gradient-to-r from-transparent via-[#ffcb9a]/20 to-transparent mt-3"></div>
-                  </motion.div>
+                  </Link>
                 ))}
-              </div>
 
-              {/* Bottom CTA */}
-              <motion.div
-                className="mt-auto px-10 pb-10"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}>
-                <Link
-                  href="/fragrance-finder"
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-center py-3 border border-[#ffcb9a]/40 rounded-full text-[#ffcb9a] hover:bg-[#ffcb9a]/10 transition-all uppercase tracking-wide">
-                  Find Your Essence
-                </Link>
-              </motion.div>
+                {/* 🛍 Cart for mobile */}
+                {mounted && (
+                  <Link
+                    href="/cart"
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center gap-2 text-xl text-[#ffcb9a] hover:text-white">
+                    <ShoppingBag className="w-5 h-5" />
+                    Cart ({totalItems})
+                  </Link>
+                )}
+              </div>
             </motion.div>
           </>
         )}

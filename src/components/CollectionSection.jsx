@@ -6,31 +6,31 @@ const products = [
   {
     name: "Midnight Whisper",
     desc: "A mysterious blend of black amber and oud, whispering secrets of the night.",
-    price: "₹4,999",
+    price: "4,999",
     img: "/images/perfume8.jpg",
   },
   {
     name: "Amber Veil",
     desc: "A warm embrace of amber and vanilla, soft as silk and everlasting.",
-    price: "₹5,499",
+    price: "5,499",
     img: "/images/perfume2.jpg",
   },
   {
     name: "Rose Noir",
     desc: "A dark rose laced with smoky cedar and patchouli — bold and sensual.",
-    price: "₹6,299",
+    price: "6,299",
     img: "/images/perfume3.jpg",
   },
   {
     name: "Oud Noir",
     desc: "An intense woody fragrance of smoky oud and rich amber, elegant and bold.",
-    price: "₹6,799",
+    price: "6,799",
     img: "/images/perfume6.jpg",
   },
   {
     name: "Ocean Luxe",
     desc: "A crisp marine fragrance with salt, driftwood, and citrus zest.",
-    price: "₹4,799",
+    price: "4,799",
     img: "/images/perfume4.jpg",
   },
 ];
@@ -75,7 +75,7 @@ export default function ProductShowcase() {
       onMouseLeave={handleResume}
       onTouchStart={handlePause}
       onTouchEnd={handleResume}>
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-[var(--font-heading)] tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#f5deb3] to-white mb-10 text-center px-4">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-(--font-heading) tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#f5deb3] to-white mb-10 text-center px-4">
         Our Collection
       </h1>
 
@@ -151,14 +151,14 @@ export default function ProductShowcase() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -30 }}
           transition={{ duration: 0.6, ease: "easeOut" }}>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-[var(--font-heading)] mb-2 text-[#f5deb3]">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-(--font-heading) mb-2 text-[#f5deb3]">
             {products[index].name}
           </h2>
-          <p className="text-gray-300 text-sm sm:text-base md:text-lg font-[var(--font-body)] leading-relaxed">
+          <p className="text-gray-300 text-sm sm:text-base md:text-lg font-(--font-body) leading-relaxed">
             {products[index].desc}
           </p>
           <p className="mt-4 text-[#f5deb3] font-semibold">
-            {products[index].price}
+            ₹{products[index].price}
           </p>
         </motion.div>
       </AnimatePresence>
