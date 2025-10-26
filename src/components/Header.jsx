@@ -74,7 +74,7 @@ export default function Header() {
             {/* 🛍️ Cart Icon */}
             <Link
               href="/cart"
-              className="relative text-[#ffcb9a] hover:text-white transition-all"
+              className="relative text-[#ff9a9d] hover:text-white transition-all"
               aria-label="Cart">
               <ShoppingBag className="w-6 h-6" />
               {mounted &&
@@ -84,7 +84,7 @@ export default function Header() {
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 12 }}
-                    className="absolute -top-2 -right-2 text-[10px] font-semibold bg-[#ffcb9a] text-black rounded-full w-4 h-4 flex items-center justify-center">
+                    className="absolute -top-2 -right-2 text-[15px] font-semibold bg-[#ea1628] text-white rounded-full w-4 h-4 flex items-center justify-center">
                     {totalItems}
                   </motion.span>
                 )}

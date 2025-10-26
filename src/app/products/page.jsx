@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import ProductGrid from "../../components/ProductGrid";
 
 export default function ProductsPage() {
@@ -7,7 +8,9 @@ export default function ProductsPage() {
         <h1 className="text-4xl md:text-6xl font-semibold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#f5deb3] to-[#fff] mb-16">
           Our SIGNATURE Collection
         </h1>
-        <ProductGrid />
+        <Suspense>
+          <ProductGrid />
+        </Suspense>
       </section>
     </main>
   );
