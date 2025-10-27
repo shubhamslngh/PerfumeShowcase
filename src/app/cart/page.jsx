@@ -9,14 +9,19 @@ export default function CartPage() {
   const subtotal = getTotalPrice();
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-black via-[#0a0a0a] to-black text-white px-4 sm:px-8 py-20">
+    // ADJUST: Reduced top/bottom padding on mobile (py-16)
+    <section className="min-h-screen bg-gradient-to-b from-black via-[#0a0a0a] to-black text-white px-4 sm:px-8 py-16 sm:py-20">
       {/* Header */}
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-4xl sm:text-5xl text-center font-(--font-heading) text-transparent bg-clip-text bg-gradient-to-r from-[#f5deb3] to-white mb-14">
-        <ShoppingCart className="inline-block w-10 h-10 text-[#f5deb3] mr-3" />
+        // ADJUST: Smaller text on mobile (text-3xl), smaller margin-bottom (mb-10)
+        className="text-3xl sm:text-4xl lg:text-5xl text-center font-(--font-heading) text-transparent bg-clip-text bg-gradient-to-r from-[#f5deb3] to-white mb-10 sm:mb-14">
+        <ShoppingCart
+          // ADJUST: Smaller icon on mobile
+          className="inline-block w-8 h-8 sm:w-10 sm:h-10 text-[#f5deb3] mr-2 sm:mr-3"
+        />
         Your Cart
       </motion.h1>
 
@@ -30,22 +35,27 @@ export default function CartPage() {
           {/* Items List */}
           <div className="lg:col-span-2 space-y-6">
             {cart.map((item, index) => (
-                <motion.div
-                    key={item.id}
+              <motion.div
+                key={item.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="flex flex-col sm:flex-row items-center justify-between bg-[#111]/70 border border-[#f5deb3]/10 rounded-2xl p-5 sm:p-6 shadow-[0_0_25px_rgba(245,222,179,0.08)]">
-                <div className="flex items-center gap-5">
+                // ADJUST: Use `sm:items-center` so mobile stacks full-width.
+                // ADJUST: Reduced padding on mobile (p-4).
+                className="flex flex-col sm:flex-row sm:items-center justify-between bg-[#111]/70 border border-[#f5deb3]/10 rounded-2xl p-4 sm:p-6 shadow-[0_0_25px_rgba(245,222,179,0.08)]">
+                {/* ADJUST: Reduced gap on mobile (gap-4) */}
+                <div className="flex items-center gap-4">
                   <Image
                     src={item.img}
                     alt={item.name}
-                    width={100}
-                    height={100}
-                    className="rounded-xl w-[6rem] sm:w-[8rem] object-cover"
+                    // ADJUST: Use largest size for width/height props
+                    width={112}
+                    height={112}
+                    // ADJUST: Smaller image on mobile (w/h-[5rem]) and added h- to ensure square
+                    className="rounded-xl w-[5rem] h-[5rem] sm:w-[7rem] sm:h-[7rem] object-cover flex-shrink-0"
                   />
                   <div>
-                    <h2 className="text-lg font-semibold text-[#f5deb3]">
+                    <h2 className="text-base sm:text-lg font-semibold text-[#f5deb3]">
                       {item.name}
                     </h2>
                     <p className="text-gray-400 text-sm mt-1">
@@ -56,16 +66,19 @@ export default function CartPage() {
                     <div className="flex items-center gap-3 mt-3">
                       <button
                         onClick={() => updateQty(item.id, item.qty - 1)}
-                        className="p-1 border border-[#f5deb3]/40 rounded-full hover:bg-[#f5deb3]/10">
-                        <Minus className="w-4 h-4 text-[#f5deb3]" />
+                        // ADJUST: Increased padding for better tap target
+                        className="p-1.5 border border-[#f5deb3]/40 rounded-full hover:bg-[#f5deb3]/10 transition-colors">
+                        {/* ADJUST: Slightly smaller icon to fit new padding */}
+                        <Minus className="w-3.5 h-3.5 text-[#f5deb3]" />
                       </button>
-                      <span className="text-[#f5deb3] font-semibold">
+                      <span className="text-[#f5deb3] font-semibold text-base w-8 text-center">
                         {item.qty}
                       </span>
                       <button
                         onClick={() => updateQty(item.id, item.qty + 1)}
-                        className="p-1 border border-[#f5deb3]/40 rounded-full hover:bg-[#f5deb3]/10">
-                        <Plus className="w-4 h-4 text-[#f5deb3]" />
+                        // ADJUST: Increased padding for better tap target
+                        className="p-1.5 border border-[#f5deb3]/40 rounded-full hover:bg-[#f5deb3]/10 transition-colors">
+                        <Plus className="w-3.5 h-3.5 text-[#f5deb3]" />
                       </button>
                     </div>
                   </div>
@@ -78,7 +91,7 @@ export default function CartPage() {
                   </p>
                   <button
                     onClick={() => removeFromCart(item.id)}
-                    className="flex items-center gap-1 mt-2 text-gray-400 hover:text-red-400 text-sm">
+                    className="flex items-center gap-1 mt-2 text-gray-400 hover:text-red-400 text-sm transition-colors">
                     <Trash2 className="w-4 h-4" />
                     Remove
                   </button>
@@ -92,7 +105,8 @@ export default function CartPage() {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-[#111]/70 border border-[#f5deb3]/10 rounded-2xl p-6 sm:p-8 shadow-[0_0_25px_rgba(245,222,179,0.08)] h-fit">
+            // ADJUST: Simplified padding to just p-6
+            className="bg-[#111]/70 border border-[#f5deb3]/10 rounded-2xl p-6 shadow-[0_0_25px_rgba(245,222,179,0.08)] h-fit">
             <h3 className="text-2xl font-semibold mb-6 text-[#f5deb3]">
               Order Summary
             </h3>
@@ -113,7 +127,8 @@ export default function CartPage() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="w-full mt-8 py-3 flex items-center justify-center gap-2 rounded-full bg-[#f5deb3] text-black font-semibold shadow-[0_0_30px_rgba(245,222,179,0.4)] hover:shadow-[0_0_45px_rgba(245,222,179,0.5)] transition-all">
+              // ADJUST: Added explicit text-base
+              className="w-full mt-8 py-3 flex items-center justify-center gap-2 rounded-full bg-[#f5deb3] text-black text-base font-semibold shadow-[0_0_30px_rgba(245,222,179,0.4)] hover:shadow-[0_0_45px_rgba(245,222,179,0.5)] transition-all">
               Proceed to Checkout
               <ArrowRight className="w-4 h-4" />
             </motion.button>

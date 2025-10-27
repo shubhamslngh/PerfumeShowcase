@@ -28,7 +28,7 @@ export default function CraftsmanshipPage() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="text-5xl md:text-7xl font-[var(--font-heading)] tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#ffcb9a] to-white">
+          className="text-4xl md:text-7xl font-(--font-heading) tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#ffcb9a] to-white">
           The Art of Craftsmanship
         </motion.h1>
         <motion.p
@@ -37,14 +37,14 @@ export default function CraftsmanshipPage() {
           animate="visible"
           custom={2}
           className="mt-8 max-w-3xl text-gray-300 font-[var(--font-body)] leading-relaxed text-lg">
-          Every bottle of Barun Perfume begins as a vision — a balance of scent,
-          light, and form. Each note, hand-blended by artisans, tells a story of
-          timeless elegance.
+          Every bottle of Post Modern Perfume begins as a vision — a balance of
+          scent, light, and form. Each note, hand-blended by artisans, tells a
+          story of timeless elegance.
         </motion.p>
       </section>
 
       {/* Divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#ffcb9a]/40 to-transparent mx-auto w-3/4" />
+      <div className="h-px bg-linear-to-r from-transparent via-[#ffcb9a]/40 to-transparent mx-auto w-3/4" />
 
       {/* Section 2 – The Glass Makers */}
       <section className="relative z-10 grid md:grid-cols-2 items-center py-32 px-6 md:px-20 gap-10">
@@ -58,7 +58,7 @@ export default function CraftsmanshipPage() {
             The Glass Makers
           </h2>
           <p className="text-gray-300 font-[var(--font-body)] leading-relaxed text-lg">
-            Each Barun bottle is born from molten glass, shaped by skilled
+            Each Post Modern bottle is born from molten glass, shaped by skilled
             artisans. The smoky gradients and elegant cubic edges symbolize
             harmony — where transparency meets mystery.
           </p>
@@ -72,7 +72,7 @@ export default function CraftsmanshipPage() {
           <img
             src="/images/crafts.jpg"
             alt="Glass Artisan"
-            className="rounded-3xl shadow-[0_0_60px_rgba(255,80,80,0.3)] w-full object-contain"
+            className="rounded-3xl shadow-[0_0_60px_rgba(255,80,80,0.3)] w-full aspect-square object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-3xl" />
         </motion.div>
@@ -86,7 +86,7 @@ export default function CraftsmanshipPage() {
         <motion.img
           src="/images/ingredients.jpg"
           alt="Ingredients"
-          className="rounded-3xl shadow-[0_0_60px_rgba(255,80,80,0.3)] w-full object-cover"
+          className="rounded-3xl shadow-[0_0_60px_rgba(255,80,80,0.3)] w-full aspect-square object-cover"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -116,7 +116,7 @@ export default function CraftsmanshipPage() {
         <motion.img
           src="/images/perfume3.jpg"
           alt="Perfume Bottle"
-          className="w-[18rem] sm:w-[24rem] md:w-[28rem] rounded-3xl mb-10 shadow-[0_0_80px_rgba(255,60,60,0.4)]"
+          className="w-[18rem] sm:w-[24rem] md:w-md rounded-3xl aspect-square mb-10 shadow-[0_0_80px_rgba(255,60,60,0.4)]"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
@@ -138,9 +138,9 @@ export default function CraftsmanshipPage() {
           viewport={{ once: true }}
           custom={3}
           className="max-w-3xl text-gray-300 font-[var(--font-body)] text-lg leading-relaxed">
-          Each Barun Perfume embodies craftsmanship beyond scent — it’s an art
-          piece meant to be seen, held, and remembered. A journey through smoke,
-          glass, and emotion.
+          Each Post Modern Perfume embodies craftsmanship beyond scent — it’s an
+          art piece meant to be seen, held, and remembered. A journey through
+          smoke, glass, and emotion.
         </motion.p>
       </section>
     </main>

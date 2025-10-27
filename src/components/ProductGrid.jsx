@@ -156,13 +156,13 @@ export default function ProductGrid() {
 
             {/* Description */}
             <div className="relative z-10 text-center md:text-left max-w-2xl">
-              <h2 className="text-4xl md:text-5xl text-white uppercase tracking-wide mb-4">
+              <h2 className="text-4xl sm:text-xl md:text-5xl text-white uppercase tracking-wide mb-4">
                 {selected.name}
               </h2>
               <p className="text-gray-300 mb-3 leading-relaxed">
                 {selected.desc}
               </p>
-              <p className="text-sm text-red-300 italic mb-3">
+              <p className="text-md text-red-300 italic mb-3">
                 Notes: {selected.notes}
               </p>
               <p className="text-[#ffcb9a] text-lg font-semibold mb-6">
@@ -171,11 +171,13 @@ export default function ProductGrid() {
 
               <div className="flex gap-4 flex-wrap justify-center md:justify-start">
                 <AddtoCart product={selected} />
-                <button onClick={handleClose} className="p-1 text-[#ffcb9a]">
-                  <X className="w-8 h-8" />
-                </button>
               </div>
             </div>
+            <button
+              onClick={handleClose}
+              className="absolute top-4 right-4 z-50 p-2 text-[#ffcb9a] rounded-full hover:bg-white/10 transition-colors">
+              <X className="w-6 h-6" />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -186,7 +188,7 @@ export default function ProductGrid() {
           {Array.from({ length: 8 }).map((_, i) => (
             <div
               key={i}
-              className="h-70 rounded-3xl bg-gradient-to-br from-red-100/10 via-gray-900/10 to-black border border-gray-700/40"
+              className="h-70  rounded-3xl bg-linear-to-br from-red-100/10 via-gray-900/10 to-black border border-gray-700/40"
             />
           ))}
         </div>
@@ -199,7 +201,7 @@ export default function ProductGrid() {
               layout
               key={item.id}
               onClick={() => handleSelect(item.id)}
-              className={`relative cursor-pointer rounded-3xl overflow-hidden group border transition-all duration-500 ${
+              className={`relative cursor-pointer rounded-3xl h-auto overflow-hidden group border transition-all duration-500 ${
                 item.id === productId
                   ? "border-[#ff4545]/60"
                   : "border-gray-800"
@@ -215,7 +217,7 @@ export default function ProductGrid() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-red-950/40 to-transparent opacity-70 group-hover:opacity-90 transition-all" />
               <div className="absolute bottom-6 left-0 right-0 text-center">
-                <h3 className="text-xl text-white uppercase tracking-wide">
+                <h3 className="text-md lg:text-xl text-white uppercase tracking-wide">
                   {item.name}
                 </h3>
                 <p className="text-[#ffcb9a] mt-1">₹ {item.price}</p>
