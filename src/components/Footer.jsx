@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="relative mt-32 bg-gradient-to-t from-black via-[#1a0000] to-[#0a0000] text-gray-300 overflow-hidden border-t border-[#ffcb9a]/20">
+    <footer className="relative bg-linear-to-t from-black via-[#1a0000] to-[#0a0000] text-gray-300 overflow-hidden border-t border-[#ffcb9a]/20">
       {/* Moving gradient lighting */}
       <motion.div
         className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,0,0,0.15),transparent_70%),radial-gradient(circle_at_80%_70%,rgba(255,80,80,0.2),transparent_70%)]"
@@ -15,7 +15,7 @@ export default function Footer() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-16 grid md:grid-cols-3 gap-10">
         {/* Brand Info */}
         <div>
-          <h3 className="text-2xl font-[var(--font-heading)] text-[#ffcb9a] uppercase tracking-wider mb-4">
+          <h3 className="text-2xl font-(--font-heading) text-[#ffcb9a] uppercase tracking-wider mb-4">
             Post Modern
           </h3>
           <p className="text-sm leading-relaxed text-gray-400 max-w-sm">
@@ -27,7 +27,7 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-lg font-[var(--font-heading)] text-[#ffcb9a] uppercase mb-4">
+          <h4 className="text-lg font-(--font-heading) text-[#ffcb9a] uppercase mb-4">
             Explore
           </h4>
           <ul className="space-y-2 text-sm">
@@ -51,10 +51,10 @@ export default function Footer() {
 
         {/* Company Details */}
         <div>
-          <h4 className="text-lg font-[var(--font-heading)] text-[#ffcb9a] uppercase mb-4">
+          <h4 className="text-lg font-(--font-heading) text-[#ffcb9a] uppercase mb-4">
             Parent Company
           </h4>
-          <p className="text-sm font-[var(--font-body)] leading-relaxed">
+          <p className="text-sm font-(--font-body) leading-relaxed">
             <span className="font-semibold text-white">
               Indian Perfumes Pvt. Ltd.
             </span>
@@ -66,7 +66,7 @@ export default function Footer() {
       </div>
 
       {/* Divider Line */}
-      <div className="relative z-10 w-3/4 mx-auto h-px bg-gradient-to-r from-transparent via-[#ffcb9a]/40 to-transparent mb-8" />
+      <div className="relative z-10 w-3/4 mx-auto h-px bg-linear-to-r from-transparent via-[#ffcb9a]/40 to-transparent mb-8" />
 
       {/* Footer Bottom */}
       <div className="relative z-10 text-center pb-6 text-xs text-gray-500">
